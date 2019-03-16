@@ -1,7 +1,208 @@
 ﻿@page "/"
+@using ControlledCoolingCalc.Model
 
-<h1>Hello, world!</h1>
+<h1>Controlled Cooling Calculator v.1.0.0</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="modelSelect">Выберите модель</label>
+                            </td>
+                            <td colspan="2">
+                                <select class="form-control" id="modelSelect" aria-describedby="thicknessText" onchange=@onModelChange>
+                                    <option value="1">10ХСНД</option>
+                                    <option value="2">К60</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="thickness">Толщина листа</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="thickness" aria-describedby="thicknessText" bind="@calculator.thickness" />
+                            </td>
+                            <td>
+                                <label>мм</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="tempWater">Температура воды</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="tempWater" aria-describedby="tempWaterText" bind="@calculator.tempWater" />
+                            </td>
+                            <td>
+                                <label>*С</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="tempBeginCooling">Температура начала охлаждения</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="tempBeginCooling" aria-describedby="tempBeginCoolingText" bind="@calculator.tempBeginCooling" />
+                            </td>
+                            <td>
+                                <label>*С</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="tempEndCooling" class="form-label">Температура конца охлаждения</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="tempEndCooling" aria-describedby="tempEndCoolingText" bind="@calculator.tempEndCooling" />
+                            </td>
+                            <td>
+                                <label>*С</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="sectionCount">Количество секций</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="sectionCount" aria-describedby="sectionCountText" bind="@calculator.sectionCount" />
+                            </td>
+                            <td>
+                                <label>шт.</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="coolingRate">Интенсивность охлаждения</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="coolingRate" aria-describedby="coolingRateText" bind="@calculator.coolingRate" />
+                            </td>
+                            <td>
+                                @*<label>*С/с</label>*@
+                                <span>*C/c</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ratio">Коэффициент соотношения "низ/верх"</label>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" bind="@isRatioEdit" class="form-check-input" id="ratioEditCheckbox" />
+                                    <label class="form-check-label" for="ratioEditCheckbox">Изменить</label>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                @if (isRatioEdit)
+                                {
+                                    <input type="number" class="form-control" id="ratio" aria-describedby="ratioText" bind="@calculator.ratio" />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="ratio" aria-describedby="ratioText" bind="@calculator.ratio" disabled />
+                                }
+                            </td>                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="waterFlowDown">Расход воды "низ"</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="waterFlowDown" aria-describedby="waterFlowDownText" bind="@waterFlowDownRound" readonly />
+                            </td>
+                            <td>
+                                @*<label>л/мин</label>*@
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="waterFlowUp">Расход воды "верх"</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="waterFlowUp" aria-describedby="waterFlowUpText" bind="@waterFlowUpRound" readonly />
+                            </td>
+                            <td>
+                                @*<label>л/мин</label>*@
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="rollerSpeed">Скорость рольганга</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="rollerSpeed" aria-describedby="rollerSpeedText" bind="@rollerSpeedRound" readonly />
+                            </td>
+                            <td>
+                                @*<label>м/с</label>*@
+                                <span>м/с</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-primary btn-block" onclick="@onCalculate">Рассчитать</button>
+    </div>
+</div>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@functions {
+    //bool isRatioEdit = false;
+    private bool isRatioEdit { get; set; } = false;
+    private int waterFlowUpRound { get; set; }
+    private int waterFlowDownRound { get; set; }
+    private string rollerSpeedRound { get; set; } = "0";
+    private string modelType { get; set; }
+    private _10CrSiNiCu model_10CrSiNiCu = new _10CrSiNiCu();
+    private Steel calculator;
+    private K60 model_K60 = null;
+
+    protected override void OnInit()
+    {
+        calculator = model_10CrSiNiCu;
+    }
+
+    void onModelChange(UIChangeEventArgs e)
+    {
+        switch (e.Value.ToString())
+        {
+            case "1":
+                if (model_10CrSiNiCu == null)
+                {
+                    model_10CrSiNiCu = new _10CrSiNiCu();
+                }
+                calculator = model_10CrSiNiCu;
+                break;
+            case "2":
+                if (model_K60 == null)
+                {
+                    model_K60 = new K60();
+                }
+                calculator = model_K60;
+                break;
+        }
+        this.StateHasChanged();
+    }
+
+    void onCalculate()
+    {
+        calculator.Calculate();
+        waterFlowUpRound = (int)Math.Round(calculator.waterFlowUp);
+        waterFlowDownRound = (int)Math.Round(calculator.waterFlowDown);
+        rollerSpeedRound = calculator.rollerSpeed.ToString("F2");
+    }
+}
