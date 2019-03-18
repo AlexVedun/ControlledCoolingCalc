@@ -1,7 +1,7 @@
 ﻿@page "/"
-@using ControlledCoolingCalc.Model
+@using Models.Model
 
-<h1>Controlled Cooling Calculator v.1.0.0</h1>
+<h1>Controlled Cooling Calculator v.1.1.0</h1>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -24,7 +24,7 @@
                                 <label for="thickness">Толщина листа</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="thickness" aria-describedby="thicknessText" bind="@calculator.thickness" />
+                                <input type="number" class="form-control" id="thickness" aria-describedby="thicknessText" bind="@calculator.thickness" onkeyup="@KeyUp" />
                             </td>
                             <td>
                                 <label>мм</label>
@@ -35,7 +35,7 @@
                                 <label for="tempWater">Температура воды</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="tempWater" aria-describedby="tempWaterText" bind="@calculator.tempWater" />
+                                <input type="number" class="form-control" id="tempWater" aria-describedby="tempWaterText" bind="@calculator.tempWater" onkeyup="@KeyUp" />
                             </td>
                             <td>
                                 <label>*С</label>
@@ -46,7 +46,7 @@
                                 <label for="tempBeginCooling">Температура начала охлаждения</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="tempBeginCooling" aria-describedby="tempBeginCoolingText" bind="@calculator.tempBeginCooling" />
+                                <input type="number" class="form-control" id="tempBeginCooling" aria-describedby="tempBeginCoolingText" bind="@calculator.tempBeginCooling" onkeyup="@KeyUp" />
                             </td>
                             <td>
                                 <label>*С</label>
@@ -57,7 +57,7 @@
                                 <label for="tempEndCooling" class="form-label">Температура конца охлаждения</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="tempEndCooling" aria-describedby="tempEndCoolingText" bind="@calculator.tempEndCooling" />
+                                <input type="number" class="form-control" id="tempEndCooling" aria-describedby="tempEndCoolingText" bind="@calculator.tempEndCooling" onkeyup="@KeyUp" />
                             </td>
                             <td>
                                 <label>*С</label>
@@ -68,7 +68,7 @@
                                 <label for="sectionCount">Количество секций</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="sectionCount" aria-describedby="sectionCountText" bind="@calculator.sectionCount" />
+                                <input type="number" class="form-control" id="sectionCount" aria-describedby="sectionCountText" bind="@calculator.sectionCount" onkeyup="@KeyUp" />
                             </td>
                             <td>
                                 <label>шт.</label>
@@ -79,10 +79,9 @@
                                 <label for="coolingRate">Интенсивность охлаждения</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="coolingRate" aria-describedby="coolingRateText" bind="@calculator.coolingRate" />
+                                <input type="number" class="form-control" id="coolingRate" aria-describedby="coolingRateText" bind="@calculator.coolingRate" onkeyup="@KeyUp" />
                             </td>
-                            <td>
-                                @*<label>*С/с</label>*@
+                            <td>                                
                                 <span>*C/c</span>
                             </td>
                         </tr>
@@ -97,13 +96,13 @@
                             <td colspan="2">
                                 @if (isRatioEdit)
                                 {
-                                    <input type="number" class="form-control" id="ratio" aria-describedby="ratioText" bind="@calculator.ratio" />
+                                    <input type="number" class="form-control" id="ratio" aria-describedby="ratioText" bind="@calculator.ratio" onkeyup="@KeyUp" />
                                 }
                                 else
                                 {
                                     <input type="number" class="form-control" id="ratio" aria-describedby="ratioText" bind="@calculator.ratio" disabled />
                                 }
-                            </td>                            
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -118,10 +117,9 @@
                                 <label for="waterFlowDown">Расход воды "низ"</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="waterFlowDown" aria-describedby="waterFlowDownText" bind="@waterFlowDownRound" readonly />
+                                <input type="number" class="form-control" id="waterFlowDown" aria-describedby="waterFlowDownText" bind="@waterFlowDownRound" disabled />
                             </td>
-                            <td>
-                                @*<label>л/мин</label>*@
+                            <td>                                
                                 <span>л/мин</span>
                             </td>
                         </tr>
@@ -130,10 +128,53 @@
                                 <label for="waterFlowUp">Расход воды "верх"</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="waterFlowUp" aria-describedby="waterFlowUpText" bind="@waterFlowUpRound" readonly />
+                                <input type="number" class="form-control" id="waterFlowUp" aria-describedby="waterFlowUpText" bind="@waterFlowUpRound" disabled />
+                            </td>
+                            <td>                                
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="waterFlowDownManual">Расход воды "низ"</label>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" bind="@isWaterFlowDownManual" class="form-check-input" id="waterFlowDownCheckbox" />
+                                    <label class="form-check-label" for="waterFlowDownCheckbox">Вручную</label>
+                                </div>
                             </td>
                             <td>
-                                @*<label>л/мин</label>*@
+                                @if (isWaterFlowDownManual)
+                                {
+                                    <input type="number" class="form-control" id="waterFlowDownManual" aria-describedby="waterFlowDownText" bind="@waterFlowDownManual" onkeyup="@KeyUp" />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="waterFlowDownManual" aria-describedby="waterFlowDownText" bind="@waterFlowDownManual" disabled />
+                                }
+                            </td>
+                            <td>
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="waterFlowUpManual">Расход воды "верх"</label>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" bind="@isWaterFlowUpManual" class="form-check-input" id="waterFlowUpCheckbox" />
+                                    <label class="form-check-label" for="waterFlowUpCheckbox">Вручную</label>
+                                </div>
+                            </td>
+                            <td>
+                                @if (isWaterFlowUpManual)
+                                {
+                                    <input type="number" class="form-control" id="waterFlowUpManual" aria-describedby="waterFlowUpText" bind="@waterFlowUpManual" onkeyup="@KeyUp" />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="waterFlowUpManual" aria-describedby="waterFlowUpText" bind="@waterFlowUpManual" disabled />
+                                }
+                            </td>
+                            <td>
                                 <span>л/мин</span>
                             </td>
                         </tr>
@@ -142,10 +183,9 @@
                                 <label for="rollerSpeed">Скорость рольганга</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" id="rollerSpeed" aria-describedby="rollerSpeedText" bind="@rollerSpeedRound" readonly />
+                                <input type="number" class="form-control" id="rollerSpeed" aria-describedby="rollerSpeedText" bind="@rollerSpeedRound" disabled />
                             </td>
-                            <td>
-                                @*<label>м/с</label>*@
+                            <td>                                
                                 <span>м/с</span>
                             </td>
                         </tr>
@@ -163,8 +203,12 @@
 @functions {
     //bool isRatioEdit = false;
     private bool isRatioEdit { get; set; } = false;
+    private bool isWaterFlowUpManual { get; set; } = false;
+    private bool isWaterFlowDownManual { get; set; } = false;
     private int waterFlowUpRound { get; set; }
     private int waterFlowDownRound { get; set; }
+    private double waterFlowDownManual { get; set; }
+    private double waterFlowUpManual { get; set; }
     private string rollerSpeedRound { get; set; } = "0";
     private string modelType { get; set; }
     private _10CrSiNiCu model_10CrSiNiCu = new _10CrSiNiCu();
@@ -200,9 +244,23 @@
 
     void onCalculate()
     {
-        calculator.Calculate();
-        waterFlowUpRound = (int)Math.Round(calculator.waterFlowUp);
-        waterFlowDownRound = (int)Math.Round(calculator.waterFlowDown);
+        calculator.Calculate(isWaterFlowDownManual, waterFlowDownManual, isWaterFlowUpManual, waterFlowUpManual);
+        if (!isWaterFlowUpManual)
+        {
+            waterFlowUpRound = (int)Math.Round(calculator.waterFlowUp);
+        }
+        if (!isWaterFlowDownManual)
+        {
+            waterFlowDownRound = (int)Math.Round(calculator.waterFlowDown);
+        }
         rollerSpeedRound = calculator.rollerSpeed.ToString("F2");
+    }
+
+    void KeyUp(UIKeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            onCalculate();
+        }
     }
 }
