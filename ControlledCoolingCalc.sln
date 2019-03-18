@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlledCoolingCalc", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{135200D4-90A1-4CB8-8142-F3C39A9A7769}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlledCoolingCalculator", "ControlledCoolingCalculator\ControlledCoolingCalculator.csproj", "{47EC4ADC-891B-4E4F-BC26-B36D831091A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{135200D4-90A1-4CB8-8142-F3C39A9A7769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{135200D4-90A1-4CB8-8142-F3C39A9A7769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{135200D4-90A1-4CB8-8142-F3C39A9A7769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47EC4ADC-891B-4E4F-BC26-B36D831091A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47EC4ADC-891B-4E4F-BC26-B36D831091A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47EC4ADC-891B-4E4F-BC26-B36D831091A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47EC4ADC-891B-4E4F-BC26-B36D831091A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
