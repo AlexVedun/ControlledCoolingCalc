@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,13 @@ namespace ControlledCoolingCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ObservableCollection<String> modelList;
+
         public MainWindow()
         {
             InitializeComponent();
+            modelList.Add("10ХСНД");
+            modelList.Add("К60");
         }
     }
 }

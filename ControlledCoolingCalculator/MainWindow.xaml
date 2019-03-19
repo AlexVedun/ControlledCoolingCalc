@@ -7,6 +7,90 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="1.7*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Модель" VerticalAlignment="Center"/>
+            <Label Content="Толщина листа" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Content="Температура воды" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Content="Температура начала охлаждения" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label Content="Температура конца охлаждения" Grid.Row="4" VerticalAlignment="Center"/>
+            <Label Content="Количество секций" Grid.Row="5" VerticalAlignment="Center"/>
+            <Label Content="Интенсивность охлаждения" Grid.Row="6" VerticalAlignment="Center"/>
+            <Label Content="Коэффициент соотношения &quot;низ/верх&quot;" Grid.Row="7" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1"/>
+            <TextBox Grid.Column="1" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2"/>
+            <TextBox Grid.Column="1" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="3"/>
+            <TextBox Grid.Column="1" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="4"/>
+            <TextBox Grid.Column="1" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="5"/>
+            <TextBox Grid.Column="1" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="6"/>
+            <TextBox Grid.Column="1" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="7" IsEnabled="{Binding IsChecked, ElementName=isRatioCheckBox}" IsTabStop="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"/>
+            <ComboBox x:Name="modelComboBox" Grid.Column="1" Margin="5,0" VerticalAlignment="Center" Grid.ColumnSpan="2" IsTabStop="False" IsEnabled="False"/>
+            <Label Content="мм" Grid.Column="2" Margin="5,0" Grid.Row="1" VerticalAlignment="Center" Padding="5"/>
+            <Label Content="*С" Grid.Column="2" Margin="5,0" Grid.Row="2" VerticalAlignment="Center" Padding="5"/>
+            <Label Content="*С" Grid.Column="2" Margin="5,0" Grid.Row="3" VerticalAlignment="Center" Padding="5"/>
+            <Label Content="*С" Grid.Column="2" Margin="5,0" Grid.Row="4" VerticalAlignment="Center" Padding="5"/>
+            <Label Content="шт." Grid.Column="2" Margin="5,0" Grid.Row="5" VerticalAlignment="Center" Padding="5"/>
+            <Label Content="*С/с" Grid.Column="2" Margin="5,0" Grid.Row="6" VerticalAlignment="Center" Padding="5"/>
+            <CheckBox x:Name="isRatioCheckBox" Content="Изменить" Grid.Column="2" Margin="5,0" Grid.Row="7" VerticalAlignment="Center" Padding="5,0,0,0" IsTabStop="False"/>
+        </Grid>
+        <Grid Grid.Column="1" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="1.7*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="5,0" Grid.Row="2" VerticalAlignment="Center">
+                <Label Content="Расход воды &quot;низ&quot;" VerticalAlignment="Center"/>
+                <CheckBox x:Name="waterFlowDownCheckBox" Content="Вручную"/>
+            </StackPanel>
+            <StackPanel Margin="5,0" Grid.Row="3" VerticalAlignment="Center">
+                <Label Content="Расход воды &quot;верх&quot;"/>
+                <CheckBox x:Name="waterFlowUpCheckBox" Content="Вручную"/>
+            </StackPanel>
+            <Label Content="Расход воды &quot;низ&quot;" Margin="5,0" VerticalAlignment="Center"/>
+            <Label Content="Расход воды &quot;верх&quot;" Margin="5,0" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Content="Скорость рольганга" Margin="5,0" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Margin="5,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Margin="5,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=waterFlowDownCheckBox}" IsTabStop="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"/>
+            <TextBox Grid.Column="1" Margin="5,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" IsEnabled="{Binding IsChecked, ElementName=waterFlowUpCheckBox}" IsTabStop="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"/>
+            <TextBox Grid.Column="1" Margin="5,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Center" IsEnabled="False"/>
+            <Label Content="л/мин" Grid.Column="2" Margin="5,0" VerticalAlignment="Center"/>
+            <Label Content="л/мин" Grid.Column="2" Margin="5,0" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Content="л/мин" Grid.Column="2" Margin="5,0" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Content="л/мин" Grid.Column="2" Margin="5,0" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label Content="м/с" Grid.Column="2" Margin="5,0" Grid.Row="4" VerticalAlignment="Center"/>
+        </Grid>
+        <Button Grid.ColumnSpan="2" Content="Расчитать" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Center" Padding="30,1" IsDefault="True"/>
+
     </Grid>
 </Window>
