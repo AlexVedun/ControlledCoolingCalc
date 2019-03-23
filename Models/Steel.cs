@@ -23,22 +23,39 @@ namespace Models.Model
         public abstract void Calculate(bool _isWaterFlowDownManual, double _waterFlowDownManual, bool _isWaterFlowUpManual, double _waterFlowUpManual);
         protected void GetWaterFlowUpDown(bool _isWaterFlowDownManual, double _waterFlowDownManual, bool _isWaterFlowUpManual, double _waterFlowUpManual)
         {
-            if (_isWaterFlowDownManual)
-            {
-                waterFlowDown = _waterFlowDownManual;
-            }
-            else
-            {
-                waterFlowDown = totalWaterFlow / (ratio + 1);
-            }
+            //if (_isWaterFlowDownManual)
+            //{
+            //    waterFlowDown = _waterFlowDownManual;
+            //}
+            //else
+            //{
+            //    waterFlowDown = totalWaterFlow / (ratio + 1);
+            //}
+            //if (_isWaterFlowUpManual)
+            //{
+            //    waterFlowUp = _waterFlowUpManual;
+            //}
+            //else
+            //{
+            //    waterFlowUp = waterFlowDown * ratio;
+            //}
             if (_isWaterFlowUpManual)
             {
                 waterFlowUp = _waterFlowUpManual;
             }
             else
             {
-                waterFlowUp = waterFlowDown * ratio;
+                waterFlowUp = totalWaterFlow / (ratio + 1);
             }
+            if (_isWaterFlowDownManual)
+            {
+                waterFlowDown = _waterFlowDownManual;
+            }
+            else
+            {
+                waterFlowDown = waterFlowUp * ratio;
+            }
+            
         }
     }
 }

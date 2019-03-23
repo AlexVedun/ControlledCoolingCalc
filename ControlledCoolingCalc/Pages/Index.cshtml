@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using Models.Model
 
-<h1>Controlled Cooling Calculator v.1.1.0</h1>
+<h1>Controlled Cooling Calculator v.1.1.2</h1>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -114,43 +114,21 @@
                     <tbody>
                         <tr>
                             <td>
-                                <label for="waterFlowDown">Расход воды "низ"</label>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="waterFlowDown" aria-describedby="waterFlowDownText" bind="@waterFlowDownRound" disabled />
-                            </td>
-                            <td>                                
-                                <span>л/мин</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 <label for="waterFlowUp">Расход воды "верх"</label>
                             </td>
                             <td>
                                 <input type="number" class="form-control" id="waterFlowUp" aria-describedby="waterFlowUpText" bind="@waterFlowUpRound" disabled />
                             </td>
-                            <td>                                
+                            <td>
                                 <span>л/мин</span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="waterFlowDownManual">Расход воды "низ"</label>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" bind="@isWaterFlowDownManual" class="form-check-input" id="waterFlowDownCheckbox" />
-                                    <label class="form-check-label" for="waterFlowDownCheckbox">Вручную</label>
-                                </div>
+                                <label for="waterFlowDown">Расход воды "низ"</label>
                             </td>
                             <td>
-                                @if (isWaterFlowDownManual)
-                                {
-                                    <input type="number" class="form-control" id="waterFlowDownManual" aria-describedby="waterFlowDownText" bind="@waterFlowDownManual" onkeyup="@KeyUp" />
-                                }
-                                else
-                                {
-                                    <input type="number" class="form-control" id="waterFlowDownManual" aria-describedby="waterFlowDownText" bind="@waterFlowDownManual" disabled />
-                                }
+                                <input type="number" class="form-control" id="waterFlowDown" aria-describedby="waterFlowDownText" bind="@waterFlowDownRound" disabled />
                             </td>
                             <td>
                                 <span>л/мин</span>
@@ -180,12 +158,34 @@
                         </tr>
                         <tr>
                             <td>
+                                <label for="waterFlowDownManual">Расход воды "низ"</label>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" bind="@isWaterFlowDownManual" class="form-check-input" id="waterFlowDownCheckbox" />
+                                    <label class="form-check-label" for="waterFlowDownCheckbox">Вручную</label>
+                                </div>
+                            </td>
+                            <td>
+                                @if (isWaterFlowDownManual)
+                                {
+                                    <input type="number" class="form-control" id="waterFlowDownManual" aria-describedby="waterFlowDownText" bind="@waterFlowDownManual" onkeyup="@KeyUp" />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="waterFlowDownManual" aria-describedby="waterFlowDownText" bind="@waterFlowDownManual" disabled />
+                                }
+                            </td>
+                            <td>
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label for="rollerSpeed">Скорость рольганга</label>
                             </td>
                             <td>
                                 <input type="number" class="form-control" id="rollerSpeed" aria-describedby="rollerSpeedText" bind="@rollerSpeedRound" disabled />
                             </td>
-                            <td>                                
+                            <td>
                                 <span>м/с</span>
                             </td>
                         </tr>
