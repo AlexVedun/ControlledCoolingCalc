@@ -1,11 +1,13 @@
 ﻿@page "/"
 @using Models.Model
 
-<h1>Controlled Cooling Calculator v.1.1.2</h1>
+@*<h1 class="d-flex justify-content-center">Controlled Cooling Calculator v.1.1.2</h1>*@
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="row">
+    <h1 class="row d-flex justify-content-center">Controlled Cooling Calculator v.1.1.2</h1>
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-header">Исходные данные</div>
+            <div class="card-body">
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
@@ -81,7 +83,7 @@
                             <td>
                                 <input type="number" class="form-control" id="coolingRate" aria-describedby="coolingRateText" bind="@calculator.coolingRate" onkeyup="@KeyUp" />
                             </td>
-                            <td>                                
+                            <td>
                                 <span>*C/c</span>
                             </td>
                         </tr>
@@ -108,8 +110,9 @@
                 </table>
             </div>
         </div>
-        <div class="col">
-            <div class="row">
+        <div class="card">
+            <div class="card-header">Результат</div>
+            <div class="card-body">
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
@@ -193,6 +196,9 @@
                 </table>
             </div>
         </div>
+    </div>    
+    <div class="row">
+        <label> </label>
     </div>
     <div class="row">
         <button type="button" class="btn btn-primary btn-block" onclick="@onCalculate">Рассчитать</button>
