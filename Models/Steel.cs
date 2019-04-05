@@ -19,26 +19,11 @@ namespace Models.Model
         protected double delta { get; set; }
         public double rollerSpeed { get; set; }
         public double ratio { get; set; }
+        public double rollingEndTemp { get; set; }
 
         public abstract void Calculate(bool _isWaterFlowDownManual, double _waterFlowDownManual, bool _isWaterFlowUpManual, double _waterFlowUpManual);
         protected void GetWaterFlowUpDown(bool _isWaterFlowDownManual, double _waterFlowDownManual, bool _isWaterFlowUpManual, double _waterFlowUpManual)
-        {
-            //if (_isWaterFlowDownManual)
-            //{
-            //    waterFlowDown = _waterFlowDownManual;
-            //}
-            //else
-            //{
-            //    waterFlowDown = totalWaterFlow / (ratio + 1);
-            //}
-            //if (_isWaterFlowUpManual)
-            //{
-            //    waterFlowUp = _waterFlowUpManual;
-            //}
-            //else
-            //{
-            //    waterFlowUp = waterFlowDown * ratio;
-            //}
+        {            
             if (_isWaterFlowUpManual)
             {
                 waterFlowUp = _waterFlowUpManual;
@@ -54,8 +39,7 @@ namespace Models.Model
             else
             {
                 waterFlowDown = waterFlowUp * ratio;
-            }
-            
+            }            
         }
     }
 }

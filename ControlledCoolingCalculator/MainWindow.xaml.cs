@@ -42,6 +42,7 @@ namespace ControlledCoolingCalculator
         private string waterFlowDownManual;
         private string waterFlowUpManual;
         private string rollerSpeed;
+        private string rollingEndTemp;
         private bool isWaterFlowDownManual;
         private bool isWaterFlowUpManual;
         
@@ -70,6 +71,8 @@ namespace ControlledCoolingCalculator
                         _10CrSiNiCu = new _10CrSiNiCu();
                     }
                     Calculator = _10CrSiNiCu;
+                    rollingEndTempTextBox.IsEnabled = true;
+                    tempBeginCoolingTextBox.IsEnabled = false;
                     break;
                 case "К60":
                     if (K60 == null)
@@ -77,6 +80,8 @@ namespace ControlledCoolingCalculator
                         K60 = new K60();
                     }
                     Calculator = K60;
+                    rollingEndTempTextBox.IsEnabled = false;
+                    tempBeginCoolingTextBox.IsEnabled = true;
                     break;
             }
             Ratio = Calculator.ratio.ToString();
@@ -100,7 +105,9 @@ namespace ControlledCoolingCalculator
                 Calculator.sectionCount = int.Parse(SectionCount);
                 Calculator.coolingRate = GetDouble(CoolingRate, 0);
                 Calculator.ratio = GetDouble(Ratio, 0);
+                Calculator.rollingEndTemp = GetDouble(RollingEndTemp, 0);
                 Calculator.Calculate(IsWaterFlowDownManual, WaterFlowDownManual != null ? double.Parse(WaterFlowDownManual) : 0, IsWaterFlowUpManual, WaterFlowUpManual != null ? double.Parse(WaterFlowUpManual) : 0);
+                TempBeginCooling = Math.Round(Calculator.tempBeginCooling).ToString();
                 if (!IsWaterFlowDownManual)
                 {
                     //WaterFlowDown = Calculator.waterFlowDown.ToString();
@@ -132,6 +139,7 @@ namespace ControlledCoolingCalculator
         public string WaterFlowDownManual { get => waterFlowDownManual; set { waterFlowDownManual = value; NotifyPropertyChanged(); } }
         public string WaterFlowUpManual { get => waterFlowUpManual; set { waterFlowUpManual = value; NotifyPropertyChanged(); } }
         public string RollerSpeed { get => rollerSpeed; set { rollerSpeed = value; NotifyPropertyChanged(); } }
+        public string RollingEndTemp { get => rollingEndTemp; set { rollingEndTemp = value; NotifyPropertyChanged(); } }
         public bool IsWaterFlowDownManual { get => isWaterFlowDownManual; set { isWaterFlowDownManual = value; NotifyPropertyChanged(); } }
         public bool IsWaterFlowUpManual { get => isWaterFlowUpManual; set { isWaterFlowUpManual = value; NotifyPropertyChanged(); } }
 
