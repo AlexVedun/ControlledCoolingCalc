@@ -30,6 +30,7 @@ namespace ControlledCoolingCalculator
         public Steel Calculator { get; set; }
         private _10CrSiNiCu _10CrSiNiCu = null;
         private K60 K60 = null;
+        private _10Mn2VNb _10Mn2VNb = null;
         private string thickness;
         private string tempWater;
         private string tempBeginCooling;
@@ -45,7 +46,7 @@ namespace ControlledCoolingCalculator
         private string rollingEndTemp;
         private bool isWaterFlowDownManual;
         private bool isWaterFlowUpManual;
-        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -55,7 +56,8 @@ namespace ControlledCoolingCalculator
             ModelList = new ObservableCollection<string>
             {
                 "10ХСНД",
-                "К60"
+                "К60",
+                "10Г2ФБ"
             };
             Calculator = null;
         }
@@ -70,18 +72,21 @@ namespace ControlledCoolingCalculator
                     {
                         _10CrSiNiCu = new _10CrSiNiCu();
                     }
-                    Calculator = _10CrSiNiCu;
-                    rollingEndTempTextBox.IsEnabled = true;
-                    tempBeginCoolingTextBox.IsEnabled = false;
+                    Calculator = _10CrSiNiCu;                    
                     break;
                 case "К60":
                     if (K60 == null)
                     {
                         K60 = new K60();
                     }
-                    Calculator = K60;
-                    rollingEndTempTextBox.IsEnabled = false;
-                    tempBeginCoolingTextBox.IsEnabled = true;
+                    Calculator = K60;                    
+                    break;
+                case "10Г2ФБ":
+                    if (_10Mn2VNb == null)
+                    {
+                        _10Mn2VNb = new _10Mn2VNb();
+                    }
+                    Calculator = _10Mn2VNb;                    
                     break;
             }
             Ratio = Calculator.ratio.ToString();
@@ -163,7 +168,7 @@ namespace ControlledCoolingCalculator
         {
             if (e.Key == Key.Enter)
             {
-                calculateButton.Focus();                
+                calculateButton.Focus();
                 calculateButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
@@ -172,6 +177,60 @@ namespace ControlledCoolingCalculator
         {
             TextBox textBox = sender as TextBox;
             textBox.SelectAll();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string answerUp;
+            string answerDown;
+            double correction;
+            double waterFlowUp = 0;
+            double waterFlowDown = 0;
+            if (textBox.Text != "")
+            {
+                correction = GetDouble(textBox.Text, 0);
+                switch (textBox.Name)
+                {
+                    case "CorrectCoolingRatePlusTextBox":
+                    case "CorrectCoolingRateMinusTextBox":                        
+                        waterFlowUp = correction / 0.0065;
+                        waterFlowDown = waterFlowUp * 2.337;                        
+                        break;
+                    case "CorrectTempEndCoolingPlusTextBox":                        
+                    case "CorrectTempEndCoolingMinusTextBox":                        
+                        waterFlowUp = correction / 0.0994;
+                        waterFlowDown = waterFlowUp * 2.337;                        
+                        break;
+                }
+                answerUp = Math.Round(waterFlowUp).ToString();
+                answerDown = Math.Round(waterFlowDown).ToString();
+
+            }
+            else
+            {
+                answerUp = "";
+                answerDown = "";
+            }
+            switch (textBox.Name)
+            {
+                case "CorrectCoolingRatePlusTextBox":
+                    CorrectWaterFlowUpPlusTextBox.Text = answerUp;
+                    CorrectWaterFlowDownPlusTextBox.Text = answerDown;
+                    break;
+                case "CorrectCoolingRateMinusTextBox":
+                    CorrectWaterFlowUpMinusTextBox.Text = answerUp;
+                    CorrectWaterFlowDownMinusTextBox.Text = answerDown;
+                    break;
+                case "CorrectTempEndCoolingPlusTextBox":
+                    CorrectWaterFlowUpTKOMinusTextBox.Text = answerUp;
+                    CorrectWaterFlowDownTKOMinusTextBox.Text = answerDown;
+                    break;
+                case "CorrectTempEndCoolingMinusTextBox":
+                    CorrectWaterFlowUpTKOPlusTextBox.Text = answerUp;
+                    CorrectWaterFlowDownTKOPlusTextBox.Text = answerDown;
+                    break;
+            }
         }
     }
 }

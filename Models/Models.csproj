@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="10CrSiNiCu.cs" />
+    <Compile Include="10Mn2VNb.cs" />
     <Compile Include="K60.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steel.cs" />
