@@ -34,16 +34,16 @@ namespace Models.Model
             
             double delta_2 = delta * delta;
             
-            totalWaterFlow = 9.17281339421534 * tempWater
-                                - 23.5168268896221 * thickness
+            totalWaterFlow =    11.0599490767372 * tempWater
+                                - 23.6384639383251 * thickness
                                 + 11.105482094709 * sectionCount
-                                + 0.211275540912892 * delta
-                                + 75.4748827740814 * coolingRate
-                                + 0.46607627856734 * thickness_2
-                                - 0.242506860459657 * delta_2
-                                - 2.17096958408184 * coolingRate_2
-                                + 0.00318035703532732 * thickness * delta * coolingRate
-                                + 0.00000201191221776733 * thickness_2 * delta_2 * coolingRate_2;
+                                + 0.206137077664584 * delta
+                                + 75.6500782342274 * coolingRate
+                                + 0.467673210485158 * thickness_2
+                                - 0.29795157286537 * delta_2
+                                - 2.18053593426642 * coolingRate_2
+                                + 0.00318875009738527 * thickness * delta * coolingRate
+                                + 0.00000200817630377281 * thickness_2 * delta_2 * coolingRate_2;
 
             GetWaterFlowUpDown(_isWaterFlowDownManual, _waterFlowDownManual, _isWaterFlowUpManual, _waterFlowUpManual);
 
