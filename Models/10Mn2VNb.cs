@@ -17,8 +17,7 @@ namespace Models.Model
         public override void Calculate(bool _isWaterFlowDownManual, double _waterFlowDownManual, bool _isWaterFlowUpManual, double _waterFlowUpManual)
         {
             double rollingEndTemp_2 = rollingEndTemp * rollingEndTemp;
-            double thickness_2 = thickness * thickness;
-            double delta_2 = delta * delta;
+            double thickness_2 = thickness * thickness;            
             double coolingRate_2 = coolingRate * coolingRate;
 
             double deltaAir =   -2.04893277896407 * rollingEndTemp 
@@ -32,7 +31,9 @@ namespace Models.Model
 
             tempBeginCooling = rollingEndTemp - deltaAir;
             delta = tempBeginCooling - tempEndCooling;
-
+            
+            double delta_2 = delta * delta;
+            
             totalWaterFlow = 9.17281339421534 * tempWater
                                 - 23.5168268896221 * thickness
                                 + 11.105482094709 * sectionCount
