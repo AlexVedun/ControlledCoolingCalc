@@ -46,6 +46,10 @@ namespace ControlledCoolingCalculator
         private string rollingEndTemp;
         private bool isWaterFlowDownManual;
         private bool isWaterFlowUpManual;
+        private string correctWaterFlowDown;
+        private string correctWaterFlowUp;
+        private string changeCoolingRate;
+        private string changeTempEndCooling;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -105,7 +109,7 @@ namespace ControlledCoolingCalculator
                 //Calculator.ratio = double.Parse(Ratio);
                 Calculator.thickness = GetDouble(Thickness, 0);
                 Calculator.tempWater = GetDouble(TempWater, 0);
-                Calculator.tempBeginCooling = GetDouble(TempBeginCooling, 0);
+                //Calculator.tempBeginCooling = GetDouble(TempBeginCooling, 0);
                 Calculator.tempEndCooling = GetDouble(TempEndCooling, 0);
                 Calculator.sectionCount = int.Parse(SectionCount);
                 Calculator.coolingRate = GetDouble(CoolingRate, 0);
@@ -147,6 +151,10 @@ namespace ControlledCoolingCalculator
         public string RollingEndTemp { get => rollingEndTemp; set { rollingEndTemp = value; NotifyPropertyChanged(); } }
         public bool IsWaterFlowDownManual { get => isWaterFlowDownManual; set { isWaterFlowDownManual = value; NotifyPropertyChanged(); } }
         public bool IsWaterFlowUpManual { get => isWaterFlowUpManual; set { isWaterFlowUpManual = value; NotifyPropertyChanged(); } }
+        public string CorrectWaterFlowDown { get => correctWaterFlowDown; set { correctWaterFlowDown = value; NotifyPropertyChanged(); } }
+        public string CorrectWaterFlowUp { get => correctWaterFlowUp; set { correctWaterFlowUp = value; NotifyPropertyChanged(); } }
+        public string ChangeCoolingRate { get => changeCoolingRate; set { changeCoolingRate = value; NotifyPropertyChanged(); } }
+        public string ChangeTempEndCooling { get => changeTempEndCooling; set { changeTempEndCooling = value; NotifyPropertyChanged(); } }
 
         public static double GetDouble(string value, double defaultValue)
         {
@@ -181,56 +189,72 @@ namespace ControlledCoolingCalculator
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBox textBox = sender as TextBox;
-            string answerUp;
-            string answerDown;
-            double correction;
-            double waterFlowUp = 0;
-            double waterFlowDown = 0;
-            if (textBox.Text != "")
-            {
-                correction = GetDouble(textBox.Text, 0);
-                switch (textBox.Name)
-                {
-                    case "CorrectCoolingRatePlusTextBox":
-                    case "CorrectCoolingRateMinusTextBox":                        
-                        waterFlowUp = correction / 0.0065;
-                        waterFlowDown = waterFlowUp * 2.337;                        
-                        break;
-                    case "CorrectTempEndCoolingPlusTextBox":                        
-                    case "CorrectTempEndCoolingMinusTextBox":                        
-                        waterFlowUp = correction / 0.0994;
-                        waterFlowDown = waterFlowUp * 2.337;                        
-                        break;
-                }
-                answerUp = Math.Round(waterFlowUp).ToString();
-                answerDown = Math.Round(waterFlowDown).ToString();
+            double changeCoolingRate = GetDouble(ChangeCoolingRateTextBox.Text, 0);
+            double changeTempEndCooling = GetDouble(ChangeTempEndCoolingTextBox.Text, 0);
+            double waterFlowUp = IsWaterFlowUpManual ? GetDouble(WaterFlowUpManual, 0) : GetDouble(WaterFlowUp, 0);
+            double waterFlowDown = IsWaterFlowDownManual ? GetDouble(WaterFlowDownManual, 0) : GetDouble(WaterFlowDown, 0);
+            double correctWaterFlowUp = waterFlowUp * (changeCoolingRate * 0.12 - changeTempEndCooling * 0.035);
+            double correctWaterFlowDown = waterFlowDown * (changeCoolingRate * 0.12 - changeTempEndCooling * 0.035);
+            CorrectWaterFlowUpTextBox.Text = correctWaterFlowUp.ToString("F2");
+            CorrectWaterFlowDownTextBox.Text = correctWaterFlowDown.ToString("F2");
+            //double changeCoolingRate = GetDouble(ChangeCoolingRate, 0);
+            //double changeTempEndCooling = GetDouble(ChangeTempEndCooling, 0);
+            //double waterFlowUp = IsWaterFlowUpManual ? GetDouble(WaterFlowUpManual, 0) : GetDouble(WaterFlowUp, 0);
+            //double waterFlowDown = IsWaterFlowDownManual ? GetDouble(WaterFlowDownManual, 0) : GetDouble(WaterFlowDown, 0);
+            //double correctWaterFlowUp = waterFlowUp * (changeCoolingRate * 0.12 - changeTempEndCooling * 0.035);
+            //double correctWaterFlowDown = waterFlowDown * (changeCoolingRate * 0.12 - changeTempEndCooling * 0.035);
+            //CorrectWaterFlowUp = correctWaterFlowUp.ToString("F2");
+            //CorrectWaterFlowDown = correctWaterFlowDown.ToString("F2");
+            //TextBox textBox = sender as TextBox;
+            //string answerUp;
+            //string answerDown;
+            //double correction;
+            //double waterFlowUp = 0;
+            //double waterFlowDown = 0;
+            //if (textBox.Text != "")
+            //{
+            //    correction = GetDouble(textBox.Text, 0);
+            //    switch (textBox.Name)
+            //    {
+            //        case "CorrectCoolingRatePlusTextBox":
+            //        case "CorrectCoolingRateMinusTextBox":                        
+            //            waterFlowUp = correction / 0.0065;
+            //            waterFlowDown = waterFlowUp * 2.337;                        
+            //            break;
+            //        case "CorrectTempEndCoolingPlusTextBox":                        
+            //        case "CorrectTempEndCoolingMinusTextBox":                        
+            //            waterFlowUp = correction / 0.0994;
+            //            waterFlowDown = waterFlowUp * 2.337;                        
+            //            break;
+            //    }
+            //    answerUp = Math.Round(waterFlowUp).ToString();
+            //    answerDown = Math.Round(waterFlowDown).ToString();
 
-            }
-            else
-            {
-                answerUp = "";
-                answerDown = "";
-            }
-            switch (textBox.Name)
-            {
-                case "CorrectCoolingRatePlusTextBox":
-                    CorrectWaterFlowUpPlusTextBox.Text = answerUp;
-                    CorrectWaterFlowDownPlusTextBox.Text = answerDown;
-                    break;
-                case "CorrectCoolingRateMinusTextBox":
-                    CorrectWaterFlowUpMinusTextBox.Text = answerUp;
-                    CorrectWaterFlowDownMinusTextBox.Text = answerDown;
-                    break;
-                case "CorrectTempEndCoolingPlusTextBox":
-                    CorrectWaterFlowUpTKOMinusTextBox.Text = answerUp;
-                    CorrectWaterFlowDownTKOMinusTextBox.Text = answerDown;
-                    break;
-                case "CorrectTempEndCoolingMinusTextBox":
-                    CorrectWaterFlowUpTKOPlusTextBox.Text = answerUp;
-                    CorrectWaterFlowDownTKOPlusTextBox.Text = answerDown;
-                    break;
-            }
+            //}
+            //else
+            //{
+            //    answerUp = "";
+            //    answerDown = "";
+            //}
+            //switch (textBox.Name)
+            //{
+            //    case "CorrectCoolingRatePlusTextBox":
+            //        CorrectWaterFlowUpPlusTextBox.Text = answerUp;
+            //        CorrectWaterFlowDownPlusTextBox.Text = answerDown;
+            //        break;
+            //    case "CorrectCoolingRateMinusTextBox":
+            //        CorrectWaterFlowUpMinusTextBox.Text = answerUp;
+            //        CorrectWaterFlowDownMinusTextBox.Text = answerDown;
+            //        break;
+            //    case "CorrectTempEndCoolingPlusTextBox":
+            //        CorrectWaterFlowUpTKOMinusTextBox.Text = answerUp;
+            //        CorrectWaterFlowDownTKOMinusTextBox.Text = answerDown;
+            //        break;
+            //    case "CorrectTempEndCoolingMinusTextBox":
+            //        CorrectWaterFlowUpTKOPlusTextBox.Text = answerUp;
+            //        CorrectWaterFlowDownTKOPlusTextBox.Text = answerDown;
+            //        break;
+            //}
         }
     }
 }
