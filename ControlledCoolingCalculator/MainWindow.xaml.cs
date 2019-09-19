@@ -109,12 +109,12 @@ namespace ControlledCoolingCalculator
                 //Calculator.ratio = double.Parse(Ratio);
                 Calculator.thickness = GetDouble(Thickness, 0);
                 Calculator.tempWater = GetDouble(TempWater, 0);
-                //Calculator.tempBeginCooling = GetDouble(TempBeginCooling, 0);
+                Calculator.tempBeginCooling = GetDouble(TempBeginCooling, 0);
                 Calculator.tempEndCooling = GetDouble(TempEndCooling, 0);
                 Calculator.sectionCount = int.Parse(SectionCount);
                 Calculator.coolingRate = GetDouble(CoolingRate, 0);
                 Calculator.ratio = GetDouble(Ratio, 0);
-                Calculator.rollingEndTemp = GetDouble(RollingEndTemp, 0);
+                //Calculator.rollingEndTemp = GetDouble(RollingEndTemp, 0);
                 Calculator.Calculate(IsWaterFlowDownManual, WaterFlowDownManual != null ? double.Parse(WaterFlowDownManual) : 0, IsWaterFlowUpManual, WaterFlowUpManual != null ? double.Parse(WaterFlowUpManual) : 0);
                 TempBeginCooling = Math.Round(Calculator.tempBeginCooling).ToString();
                 if (!IsWaterFlowDownManual)
@@ -156,6 +156,8 @@ namespace ControlledCoolingCalculator
         public string ChangeCoolingRate { get => changeCoolingRate; set { changeCoolingRate = value; NotifyPropertyChanged(); } }
         public string ChangeTempEndCooling { get => changeTempEndCooling; set { changeTempEndCooling = value; NotifyPropertyChanged(); } }
 
+        public bool IsNotCorrectS1IsManual { get => (bool)!CorrectS1IsManual.IsChecked; }
+
         public static double GetDouble(string value, double defaultValue)
         {
             double result;
@@ -189,14 +191,14 @@ namespace ControlledCoolingCalculator
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            double changeCoolingRate = GetDouble(ChangeCoolingRateTextBox.Text, 0);
-            double changeTempEndCooling = GetDouble(ChangeTempEndCoolingTextBox.Text, 0);
-            double waterFlowUp = IsWaterFlowUpManual ? GetDouble(WaterFlowUpManual, 0) : GetDouble(WaterFlowUp, 0);
-            double waterFlowDown = IsWaterFlowDownManual ? GetDouble(WaterFlowDownManual, 0) : GetDouble(WaterFlowDown, 0);
-            double correctWaterFlowUp = waterFlowUp * (changeCoolingRate * 0.12 - changeTempEndCooling * 0.035);
-            double correctWaterFlowDown = waterFlowDown * (changeCoolingRate * 0.12 - changeTempEndCooling * 0.035);
-            CorrectWaterFlowUpTextBox.Text = correctWaterFlowUp.ToString("F2");
-            CorrectWaterFlowDownTextBox.Text = correctWaterFlowDown.ToString("F2");
+            //double changeCoolingRate = GetDouble(ChangeCoolingRateTextBox.Text, 0);
+            //double changeTempEndCooling = GetDouble(ChangeTempEndCoolingTextBox.Text, 0);
+            //double waterFlowUp = IsWaterFlowUpManual ? GetDouble(WaterFlowUpManual, 0) : GetDouble(WaterFlowUp, 0);
+            //double waterFlowDown = IsWaterFlowDownManual ? GetDouble(WaterFlowDownManual, 0) : GetDouble(WaterFlowDown, 0);
+            //double correctWaterFlowUp = waterFlowUp * (changeCoolingRate * 0.12 - changeTempEndCooling * 0.035);
+            //double correctWaterFlowDown = waterFlowDown * (changeCoolingRate * 0.12 - changeTempEndCooling * 0.035);
+            //CorrectWaterFlowUpTextBox.Text = correctWaterFlowUp.ToString("F2");
+            //CorrectWaterFlowDownTextBox.Text = correctWaterFlowDown.ToString("F2");
             //double changeCoolingRate = GetDouble(ChangeCoolingRate, 0);
             //double changeTempEndCooling = GetDouble(ChangeTempEndCooling, 0);
             //double waterFlowUp = IsWaterFlowUpManual ? GetDouble(WaterFlowUpManual, 0) : GetDouble(WaterFlowUp, 0);
@@ -255,6 +257,87 @@ namespace ControlledCoolingCalculator
             //        CorrectWaterFlowDownTKOPlusTextBox.Text = answerDown;
             //        break;
             //}
+        }
+
+        private void CorrectS2RollingEndTempChange_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            double beginWaterFlowUp = GetDouble(CorrectS2BeginWaterFlowUp.Text, 0);
+            double beginWaterFlowDown = GetDouble(CorrectS2BeginWaterFlowDown.Text, 0);
+            double rollingEndTempChange = GetDouble(textBox.Text, 0);
+
+            switch(textBox.Name)
+            {
+                case "CorrectS2RollingEndTempIncreaseBy":                    
+                    CorrectS2NewWaterFlowUp.Text = Math.Round(beginWaterFlowUp - 3.5 * rollingEndTempChange).ToString();
+                    CorrectS2NewWaterFlowDown.Text = Math.Round(beginWaterFlowDown - 3.5 * rollingEndTempChange).ToString();
+                    break;
+                case "CorrectS2RollingEndTempDecreaseBy":
+                    
+                    CorrectS2NewWaterFlowUp.Text = Math.Round(beginWaterFlowUp + 3.5 * rollingEndTempChange).ToString();
+                    CorrectS2NewWaterFlowDown.Text = Math.Round(beginWaterFlowDown + 3.5 * rollingEndTempChange).ToString();
+                    break;
+            }
+        }
+
+        private void CorrectS1IsManual_Checked(object sender, RoutedEventArgs e)
+        {
+            CorrectS1NewRollerSpeed.IsEnabled = false;
+        }
+
+        private void CorrectS1IsManual_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CorrectS1NewRollerSpeed.IsEnabled = true;
+        }
+
+        private void CorrectS1ChangeCoolingRate_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            double beginRollerSpeed = GetDouble(CorrctS1BeginRollerSpeed.Text, 0);
+            double coolingRateChange = GetDouble(textBox.Text, 0);
+            double beginWaterFlowUp = GetDouble(CorrectS1BeginWaterFlowUp.Text, 0);
+            double beginWaterFlowDown = GetDouble(CorrectS1BeginWaterFlowDown.Text, 0);
+            double newRollerSpeed = 0;
+
+            switch (textBox.Name)
+            {
+                case "CorrectS1IncreaseCoolingRate":
+                    if (!(bool)CorrectS1IsManual.IsChecked)
+                    {
+                        newRollerSpeed = beginRollerSpeed + 0.055 * coolingRateChange;
+                        CorrectS1NewRollerSpeed.Text = newRollerSpeed.ToString("F2");
+                    }
+                    else
+                    {
+                        newRollerSpeed = GetDouble(CorrectS1ManualRollerSpeed.Text, 0);
+                    }
+                    break;
+                case "CorrectS1DecreaseCoolingRate":
+                    if (!(bool)CorrectS1IsManual.IsChecked)
+                    {
+                        newRollerSpeed = beginRollerSpeed - 0.055 * coolingRateChange;
+                        CorrectS1NewRollerSpeed.Text = newRollerSpeed.ToString("F2");
+                    }
+                    else
+                    {
+                        newRollerSpeed = GetDouble(CorrectS1ManualRollerSpeed.Text, 0);
+                    }
+                    break;
+            }
+            CorrectS1NewWaterFlowUp.Text = Math.Round(beginWaterFlowUp * newRollerSpeed / beginRollerSpeed).ToString();
+            CorrectS1NewWaterFlowDown.Text = Math.Round(beginWaterFlowDown * newRollerSpeed / beginRollerSpeed).ToString();
+        }
+
+        private void CorrectS1ManualRollerSpeed_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CorrectS1IncreaseCoolingRate.Clear();
+            CorrectS1DecreaseCoolingRate.Clear();
+            double newRollerSpeed = GetDouble(CorrectS1ManualRollerSpeed.Text, 0);
+            double beginRollerSpeed = GetDouble(CorrctS1BeginRollerSpeed.Text, 0);
+            double beginWaterFlowUp = GetDouble(CorrectS1BeginWaterFlowUp.Text, 0);
+            double beginWaterFlowDown = GetDouble(CorrectS1BeginWaterFlowDown.Text, 0);
+            CorrectS1NewWaterFlowUp.Text = Math.Round(beginWaterFlowUp * newRollerSpeed / beginRollerSpeed).ToString();
+            CorrectS1NewWaterFlowDown.Text = Math.Round(beginWaterFlowDown * newRollerSpeed / beginRollerSpeed).ToString();
         }
     }
 }

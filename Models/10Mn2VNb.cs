@@ -16,20 +16,20 @@ namespace Models.Model
 
         public override void Calculate(bool _isWaterFlowDownManual, double _waterFlowDownManual, bool _isWaterFlowUpManual, double _waterFlowUpManual)
         {
-            double rollingEndTemp_2 = rollingEndTemp * rollingEndTemp;
+            //double rollingEndTemp_2 = rollingEndTemp * rollingEndTemp;
             double thickness_2 = thickness * thickness;            
             double coolingRate_2 = coolingRate * coolingRate;
 
-            double deltaAir =   -2.04893277896407 * rollingEndTemp 
-                                + 88.7134801672352 * thickness 
-                                + 4.02381247438084 * tempWater
-                                - 0.110663638373992 * rollingEndTemp * thickness 
-                                + 0.00236054905582028 * rollingEndTemp_2
-                                - 0.663734074471114 * thickness_2 
-                                + 0.00000106266084332336 * rollingEndTemp_2 * thickness_2 
-                                + 0.0456512660658946 * rollingEndTemp_2 / (thickness * tempWater);
+            //double deltaAir =   -2.04893277896407 * rollingEndTemp 
+            //                    + 88.7134801672352 * thickness 
+            //                    + 4.02381247438084 * tempWater
+            //                    - 0.110663638373992 * rollingEndTemp * thickness 
+            //                    + 0.00236054905582028 * rollingEndTemp_2
+            //                    - 0.663734074471114 * thickness_2 
+            //                    + 0.00000106266084332336 * rollingEndTemp_2 * thickness_2 
+            //                    + 0.0456512660658946 * rollingEndTemp_2 / (thickness * tempWater);
 
-            tempBeginCooling = rollingEndTemp - deltaAir;
+            //tempBeginCooling = rollingEndTemp - deltaAir;
             delta = tempBeginCooling - tempEndCooling;
             
             double delta_2 = delta * delta;
