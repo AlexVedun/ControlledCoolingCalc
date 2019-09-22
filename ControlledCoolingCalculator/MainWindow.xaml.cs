@@ -268,12 +268,27 @@ namespace ControlledCoolingCalculator
 
             switch(textBox.Name)
             {
-                case "CorrectS2RollingEndTempIncreaseBy":                    
+                case "CorrectS2RollingEndTempIncreaseBy":
+                    if (textBox.Text != "")
+                    {
+                        CorrectS2RollingEndTempDecreaseBy.IsEnabled = false;
+                    }
+                    else
+                    {
+                        CorrectS2RollingEndTempDecreaseBy.IsEnabled = true;
+                    }
                     CorrectS2NewWaterFlowUp.Text = Math.Round(beginWaterFlowUp - 3.5 * rollingEndTempChange).ToString();
                     CorrectS2NewWaterFlowDown.Text = Math.Round(beginWaterFlowDown - 3.5 * rollingEndTempChange).ToString();
                     break;
                 case "CorrectS2RollingEndTempDecreaseBy":
-                    
+                    if (textBox.Text != "")
+                    {
+                        CorrectS2RollingEndTempIncreaseBy.IsEnabled = false;
+                    }
+                    else
+                    {
+                        CorrectS2RollingEndTempIncreaseBy.IsEnabled = true;
+                    }
                     CorrectS2NewWaterFlowUp.Text = Math.Round(beginWaterFlowUp + 3.5 * rollingEndTempChange).ToString();
                     CorrectS2NewWaterFlowDown.Text = Math.Round(beginWaterFlowDown + 3.5 * rollingEndTempChange).ToString();
                     break;
@@ -302,6 +317,14 @@ namespace ControlledCoolingCalculator
             switch (textBox.Name)
             {
                 case "CorrectS1IncreaseCoolingRate":
+                    if (textBox.Text != "")
+                    {
+                        CorrectS1DecreaseCoolingRate.IsEnabled = false;
+                    }
+                    else
+                    {
+                        CorrectS1DecreaseCoolingRate.IsEnabled = true;
+                    }
                     if (!(bool)CorrectS1IsManual.IsChecked)
                     {
                         newRollerSpeed = beginRollerSpeed + 0.055 * coolingRateChange;
@@ -313,6 +336,14 @@ namespace ControlledCoolingCalculator
                     }
                     break;
                 case "CorrectS1DecreaseCoolingRate":
+                    if (textBox.Text != "")
+                    {
+                        CorrectS1IncreaseCoolingRate.IsEnabled = false;
+                    }
+                    else
+                    {
+                        CorrectS1IncreaseCoolingRate.IsEnabled = true;
+                    }
                     if (!(bool)CorrectS1IsManual.IsChecked)
                     {
                         newRollerSpeed = beginRollerSpeed - 0.055 * coolingRateChange;
