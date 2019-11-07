@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ControlledCoolingCalculator"
         mc:Ignorable="d"
-        Title="Controlled Cooling Calculator 1.5.1" Width="1050" MinWidth="1050" WindowStartupLocation="CenterScreen" Icon="Icon/Icon.PNG" d:DesignHeight="599.511">
+        Title="Controlled Cooling Calculator 1.5.2" Width="1050" MinWidth="1050" WindowStartupLocation="CenterScreen" Icon="Icon/Icon.PNG" d:DesignHeight="599.511" MinHeight="650">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
@@ -138,7 +138,7 @@
                 <TextBox x:Name="CorrectS1NewWaterFlowDown" Grid.Column="4" Margin="0" TextWrapping="Wrap" MinHeight="20" VerticalAlignment="Center" Grid.Row="4" IsEnabled="False"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Корректировка температуры конца прокатки (расходом воды)" Margin="5" Grid.Row="3" Grid.Column="1">
+        <GroupBox Header="Корректировка температуры конца охлаждения (расходом воды)" Margin="5" Grid.Row="3" Grid.Column="1">
             <Grid Margin="0">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -166,7 +166,7 @@
                 <Label Content="&quot;низ&quot;" Margin="0,11,0,12" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right"/>
                 <TextBox x:Name="CorrectS2NewWaterFlowUp" Grid.Column="2" Margin="0,15,0,14" TextWrapping="Wrap" VerticalAlignment="Center" MinHeight="20" RenderTransformOrigin="0.44,2.975" Grid.Row="2" IsEnabled="False"/>
                 <TextBox x:Name="CorrectS2NewWaterFlowDown" Grid.Column="5" Margin="0,15,0,14" TextWrapping="Wrap" VerticalAlignment="Center" MinHeight="20" RenderTransformOrigin="0.44,2.975" Grid.Row="2" IsEnabled="False"/>
-                <TextBlock Margin="0,8" Grid.Row="1" TextWrapping="Wrap" Text="Изменить температуру конца прокатки (*С)" VerticalAlignment="Center" Padding="5"/>
+                <TextBlock Margin="0,8" Grid.Row="1" TextWrapping="Wrap" Text="Изменить температуру конца охлаждения (*С)" VerticalAlignment="Center" Padding="5"/>
             </Grid>
         </GroupBox>
         <!--<GroupBox Grid.Column="1" Header="Корректировка температуры конца охлаждения" Margin="5" Grid.Row="2">
