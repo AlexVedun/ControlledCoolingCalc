@@ -15,13 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0C86F7EA735E4B57B0C76F87485739E5"
+        "MsmKey" = "8:_04A91216CC96414B88EF564399FF09B8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1C90AC107D840D8AFE5D7969F288CDDE"
+        "MsmKey" = "8:_1464ADAA9157C0758B0FF9DEB2707A21"
+        "OwnerKey" = "8:_93CC303A79F7405486D8020D42380298"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_28A4BCCD43255506442F6B51311E0028"
         "OwnerKey" = "8:_93CC303A79F7405486D8020D42380298"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,14 +39,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E989B27375C0117330D49FD5836BC90D"
-        "OwnerKey" = "8:_93CC303A79F7405486D8020D42380298"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E989B27375C0117330D49FD5836BC90D"
+        "MsmKey" = "8:_AA54F2011D3E420DA7D29CCC6D598A04"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,7 +52,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1C90AC107D840D8AFE5D7969F288CDDE"
+        "OwnerKey" = "8:_28A4BCCD43255506442F6B51311E0028"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1464ADAA9157C0758B0FF9DEB2707A21"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -73,6 +79,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -89,6 +111,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:C:\\Users\\alexe\\Downloads"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 и x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -118,10 +156,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0C86F7EA735E4B57B0C76F87485739E5"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_04A91216CC96414B88EF564399FF09B8"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\Downloads\\Icon.ico"
-            "TargetName" = "8:Icon.ico"
+            "SourcePath" = "8:..\\..\\Manual.docx"
+            "TargetName" = "8:Manual.docx"
             "Tag" = "8:"
             "Folder" = "8:_2270C083A51D443DB8A2D8F30F53DE41"
             "Condition" = "8:"
@@ -138,14 +176,45 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1C90AC107D840D8AFE5D7969F288CDDE"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1464ADAA9157C0758B0FF9DEB2707A21"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                "ScatterAssemblies"
+                {
+                    "_1464ADAA9157C0758B0FF9DEB2707A21"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2270C083A51D443DB8A2D8F30F53DE41"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_28A4BCCD43255506442F6B51311E0028"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_1C90AC107D840D8AFE5D7969F288CDDE"
+                    "_28A4BCCD43255506442F6B51311E0028"
                     {
                     "Name" = "8:Models.dll"
                     "Attributes" = "3:512"
@@ -169,21 +238,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E989B27375C0117330D49FD5836BC90D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA54F2011D3E420DA7D29CCC6D598A04"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-                "ScatterAssemblies"
-                {
-                    "_E989B27375C0117330D49FD5836BC90D"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:System.Net.Http.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\Icon.ico"
+            "TargetName" = "8:Icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_2270C083A51D443DB8A2D8F30F53DE41"
             "Condition" = "8:"
@@ -197,7 +255,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -267,21 +325,21 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ControlledCoolingCalculator"
-        "ProductCode" = "8:{5129925E-C329-4BCA-83BA-064F73E38AB7}"
-        "PackageCode" = "8:{F5C79C93-C8B9-4619-B5F7-24802F7354AA}"
-        "UpgradeCode" = "8:{2C642384-EBBC-4D6A-BA04-B111874AA7D2}"
+        "ProductCode" = "8:{734BF1A3-2A13-400C-9F78-A3FA55AAE242}"
+        "PackageCode" = "8:{B6182565-D5AB-426B-9D6E-1506D4FA61F4}"
+        "UpgradeCode" = "8:{9380F1FE-59BF-46D6-9221-48E7DC4D0DD3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:2.0.0"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:ControlledCoolingCalculator"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:Efremenko Alexey"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -399,7 +457,7 @@
             "Target" = "8:_93CC303A79F7405486D8020D42380298"
             "Folder" = "8:_63BCBB5A981D4CE0B4BE415CFB161E44"
             "WorkingFolder" = "8:_2270C083A51D443DB8A2D8F30F53DE41"
-            "Icon" = "8:_0C86F7EA735E4B57B0C76F87485739E5"
+            "Icon" = "8:_AA54F2011D3E420DA7D29CCC6D598A04"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_FBBA3A7B08AB4B4DA9A0805CEC5C86A3"
@@ -413,7 +471,7 @@
             "Target" = "8:_93CC303A79F7405486D8020D42380298"
             "Folder" = "8:_C8D26C9A1AB74AF587027BA11DC8969C"
             "WorkingFolder" = "8:_2270C083A51D443DB8A2D8F30F53DE41"
-            "Icon" = "8:_0C86F7EA735E4B57B0C76F87485739E5"
+            "Icon" = "8:_AA54F2011D3E420DA7D29CCC6D598A04"
             "Feature" = "8:"
             }
         }

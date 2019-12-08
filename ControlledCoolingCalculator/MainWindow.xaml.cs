@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -369,6 +371,28 @@ namespace ControlledCoolingCalculator
             double beginWaterFlowDown = GetDouble(CorrectS1BeginWaterFlowDown.Text, 0);
             CorrectS1NewWaterFlowUp.Text = Math.Round(beginWaterFlowUp * newRollerSpeed / beginRollerSpeed).ToString();
             CorrectS1NewWaterFlowDown.Text = Math.Round(beginWaterFlowDown * newRollerSpeed / beginRollerSpeed).ToString();
+        }
+
+        private void menuHelp_Click(object sender, RoutedEventArgs e)
+        {
+            string manual = "Manual.docx";
+
+            if (!File.Exists(manual))
+            {
+                System.Windows.Resources.StreamResourceInfo res =
+                    Application.GetResourceStream(new Uri(manual, UriKind.Relative));
+                var outputFile = new System.IO.FileStream(manual, System.IO.FileMode.OpenOrCreate);
+
+                res.Stream.CopyTo(outputFile);
+                res.Stream.Close();
+                outputFile.Close();
+            }
+            Process.Start(manual);
+        }
+
+        private void menuExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
