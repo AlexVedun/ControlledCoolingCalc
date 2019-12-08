@@ -177,6 +177,7 @@
                 </MenuItem>
                 <MenuItem Header="Справка">
                     <MenuItem x:Name="menuHelp" Header="Помощь" Click="menuHelp_Click"/>
+                    <MenuItem x:Name="menuAbout" Header="О программе" Click="menuAbout_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

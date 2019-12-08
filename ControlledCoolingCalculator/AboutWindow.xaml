@@ -1,0 +1,31 @@
+﻿<Window x:Class="ControlledCoolingCalculator.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControlledCoolingCalculator"
+        mc:Ignorable="d"
+        Title="О программе" Height="470" Width="800" ResizeMode="NoResize" Icon="Icon.ico" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+            <Image HorizontalAlignment="Left" Height="100" Margin="0" VerticalAlignment="Top" Width="100" Source="Icon.ico"/>
+        </Border>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Программа «Controlled Cooling Calculator»" VerticalAlignment="Center" FontFamily="Arial" FontSize="30" FontWeight="Bold"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="5" Grid.Row="1" Padding="10" CornerRadius="10">
+            <TextBlock Margin="0" TextWrapping="Wrap" FontFamily="Arial" FontSize="20" TextAlignment="Justify"><Run Text="Прикладная"/><Run Text=" компьютерная программа «Controlled Cooling Calculator» предназначена для оперативного выбора рабочих параметров УКО при проведении ускоренного охлаждения листового проката различных марок стали."/></TextBlock>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="5" Grid.Row="2" Padding="10" CornerRadius="10">
+            <TextBlock Margin="0" TextWrapping="Wrap" FontFamily="Arial" TextAlignment="Justify" FontSize="20"><Span FontWeight="Bold" FontStyle="Italic"><Run Text="Разработчик"/></Span><Span><Run Text=" – Государственное высшее учреждение «Приазовский государственный технический университет» (2019 г.)."/></Span><LineBreak/><Span><Run/></Span><LineBreak/><Span FontWeight="Bold" FontStyle="Italic"><Run Text="Авторы"/></Span><Span><Run Text=" – д.т.н. Ефременко В.Г., к.т.н. Чабак Ю.Г., к.т.н. Зурнаджи В.И., к.т.н. Ефременко А.В."/></Span><LineBreak/><Span><Run/></Span><LineBreak/><Span FontWeight="Bold" FontStyle="Italic"><Run Text="Компьютерный дизайн"/></Span><Run Text=" – к.т.н. Ефременко А.В."/></TextBlock>
+        </Border>
+
+    </Grid>
+</Window>

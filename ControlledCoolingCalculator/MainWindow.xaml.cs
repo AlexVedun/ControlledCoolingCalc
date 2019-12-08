@@ -394,5 +394,12 @@ namespace ControlledCoolingCalculator
         {
             Application.Current.Shutdown();
         }
+
+        private void menuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+
+            aboutWindow.ShowDialog();
+        }
     }
 }
