@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_04A91216CC96414B88EF564399FF09B8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1464ADAA9157C0758B0FF9DEB2707A21"
         "OwnerKey" = "8:_93CC303A79F7405486D8020D42380298"
         "MsmSig" = "8:_UNDEFINED"
@@ -156,26 +150,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_04A91216CC96414B88EF564399FF09B8"
-            {
-            "SourcePath" = "8:..\\..\\Manual.docx"
-            "TargetName" = "8:Manual.docx"
-            "Tag" = "8:"
-            "Folder" = "8:_2270C083A51D443DB8A2D8F30F53DE41"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1464ADAA9157C0758B0FF9DEB2707A21"
             {
             "AssemblyRegister" = "3:1"
@@ -324,20 +298,20 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:ControlledCoolingCalculator"
-        "ProductCode" = "8:{734BF1A3-2A13-400C-9F78-A3FA55AAE242}"
-        "PackageCode" = "8:{B6182565-D5AB-426B-9D6E-1506D4FA61F4}"
+        "ProductName" = "8:Controlled Cooling Calculator"
+        "ProductCode" = "8:{C1ED5621-5DBE-4809-B71C-A0BF63C13171}"
+        "PackageCode" = "8:{98C206EE-5DC5-42CB-8C40-CCBDD4374687}"
         "UpgradeCode" = "8:{9380F1FE-59BF-46D6-9221-48E7DC4D0DD3}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.0.0"
+        "InstallAllUsers" = "11:TRUE"
+        "ProductVersion" = "8:2.1.1"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:ControlledCoolingCalculator"
+        "Title" = "8:Controlled Cooling Calculator"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Efremenko Alexey"
         "Keywords" = "8:"

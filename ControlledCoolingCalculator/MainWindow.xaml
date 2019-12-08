@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ControlledCoolingCalculator"
         mc:Ignorable="d"
-        Title="Controlled Cooling Calculator 1.6.0" Width="1050" MinWidth="1050" WindowStartupLocation="CenterScreen" Icon="Icon/Icon.PNG" d:DesignHeight="599.511" MinHeight="650">
+        Title="Controlled Cooling Calculator 1.7.0" Width="1050" MinWidth="1050" WindowStartupLocation="CenterScreen" Icon="Icon/Icon.PNG" d:DesignHeight="599.511" MinHeight="650" Closed="window_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

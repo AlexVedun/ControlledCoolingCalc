@@ -375,19 +375,8 @@ namespace ControlledCoolingCalculator
 
         private void menuHelp_Click(object sender, RoutedEventArgs e)
         {
-            string manual = "Manual.docx";
-
-            if (!File.Exists(manual))
-            {
-                System.Windows.Resources.StreamResourceInfo res =
-                    Application.GetResourceStream(new Uri(manual, UriKind.Relative));
-                var outputFile = new System.IO.FileStream(manual, System.IO.FileMode.OpenOrCreate);
-
-                res.Stream.CopyTo(outputFile);
-                res.Stream.Close();
-                outputFile.Close();
-            }
-            Process.Start(manual);
+            ManualWindow manualWindow = new ManualWindow();
+            manualWindow.Show();
         }
 
         private void menuExit_Click(object sender, RoutedEventArgs e)
@@ -400,6 +389,11 @@ namespace ControlledCoolingCalculator
             AboutWindow aboutWindow = new AboutWindow();
 
             aboutWindow.ShowDialog();
+        }
+
+        private void window_Closed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
