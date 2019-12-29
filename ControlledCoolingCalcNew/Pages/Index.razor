@@ -1,0 +1,301 @@
+﻿@page "/"
+@using Models.Model
+
+@*<h1 class="d-flex justify-content-center">Controlled Cooling Calculator v.1.1.2</h1>*@
+<div class="container">
+    <h1 class="row d-flex justify-content-center">Controlled Cooling Calculator v.1.2.0</h1>
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-header">Исходные данные</div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="modelSelect">Выберите модель</label>
+                            </td>
+                            <td colspan="2">
+                                <select class="form-control" id="modelSelect" aria-describedby="thicknessText" @onchange="onModelChange">
+                                    <option value="1">10ХСНД</option>
+                                    <option value="2">К60</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="rollingEndTemp">Температура конца прокатки</label>
+                            </td>
+                            <td>
+
+                                @if (is10CrSiNiCu)
+                                {
+                                    <input type="number" class="form-control" id="rollingEndTemp" aria-describedby="rollingEndTempText" @bind="calculator.rollingEndTemp" @onkeyup="KeyUp" />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="rollingEndTemp" aria-describedby="rollingEndTempText" @bind="calculator.rollingEndTemp" @onkeyup="KeyUp" disabled />
+                                }
+                            </td>
+                            <td>
+                                <label>*C</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="thickness">Толщина листа</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="thickness" aria-describedby="thicknessText" @bind="calculator.thickness" @onkeyup="KeyUp" />
+                            </td>
+                            <td>
+                                <label>мм</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="tempWater">Температура воды</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="tempWater" aria-describedby="tempWaterText" @bind="calculator.tempWater" @onkeyup="KeyUp" />
+                            </td>
+                            <td>
+                                <label>*С</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="tempBeginCooling">Температура начала охлаждения</label>
+                            </td>
+                            <td>
+                                @if (is10CrSiNiCu)
+                                {
+                                    <input type="number" class="form-control" id="tempBeginCooling" aria-describedby="tempBeginCoolingText" @bind="calculator.tempBeginCooling" @onkeyup="KeyUp" disabled />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="tempBeginCooling" aria-describedby="tempBeginCoolingText" @bind="calculator.tempBeginCooling" @onkeyup="KeyUp" />
+                                }
+                            </td>
+                            <td>
+                                <label>*С</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="tempEndCooling" class="form-label">Температура конца охлаждения</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="tempEndCooling" aria-describedby="tempEndCoolingText" @bind="calculator.tempEndCooling" @onkeyup="KeyUp" />
+                            </td>
+                            <td>
+                                <label>*С</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="sectionCount">Количество секций</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="sectionCount" aria-describedby="sectionCountText" @bind="calculator.sectionCount" @onkeyup="KeyUp" />
+                            </td>
+                            <td>
+                                <label>шт.</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="coolingRate">Интенсивность охлаждения</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="coolingRate" aria-describedby="coolingRateText" @bind="calculator.coolingRate" @onkeyup="KeyUp" />
+                            </td>
+                            <td>
+                                <span>*C/c</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ratio">Коэффициент соотношения "низ/верх"</label>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" @bind="isRatioEdit" class="form-check-input" id="ratioEditCheckbox" />
+                                    <label class="form-check-label" for="ratioEditCheckbox">Изменить</label>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                @if (isRatioEdit)
+                                {
+                                    <input type="number" class="form-control" id="ratio" aria-describedby="ratioText" @bind="calculator.ratio" @onkeyup="KeyUp" />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="ratio" aria-describedby="ratioText" @bind="calculator.ratio" disabled />
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">Результат</div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="waterFlowUp">Расход воды "верх"</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="waterFlowUp" aria-describedby="waterFlowUpText" @bind="waterFlowUpRound" disabled />
+                            </td>
+                            <td>
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="waterFlowDown">Расход воды "низ"</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="waterFlowDown" aria-describedby="waterFlowDownText" @bind="waterFlowDownRound" disabled />
+                            </td>
+                            <td>
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="waterFlowUpManual">Расход воды "верх"</label>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" @bind="isWaterFlowUpManual" class="form-check-input" id="waterFlowUpCheckbox" />
+                                    <label class="form-check-label" for="waterFlowUpCheckbox">Вручную</label>
+                                </div>
+                            </td>
+                            <td>
+                                @if (isWaterFlowUpManual)
+                                {
+                                    <input type="number" class="form-control" id="waterFlowUpManual" aria-describedby="waterFlowUpText" @bind="waterFlowUpManual" @onkeyup="KeyUp" />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="waterFlowUpManual" aria-describedby="waterFlowUpText" @bind="waterFlowUpManual" disabled />
+                                }
+                            </td>
+                            <td>
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="waterFlowDownManual">Расход воды "низ"</label>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" @bind="isWaterFlowDownManual" class="form-check-input" id="waterFlowDownCheckbox" />
+                                    <label class="form-check-label" for="waterFlowDownCheckbox">Вручную</label>
+                                </div>
+                            </td>
+                            <td>
+                                @if (isWaterFlowDownManual)
+                                {
+                                    <input type="number" class="form-control" id="waterFlowDownManual" aria-describedby="waterFlowDownText" @bind="waterFlowDownManual" @onkeyup="KeyUp" />
+                                }
+                                else
+                                {
+                                    <input type="number" class="form-control" id="waterFlowDownManual" aria-describedby="waterFlowDownText" @bind="waterFlowDownManual" disabled />
+                                }
+                            </td>
+                            <td>
+                                <span>л/мин</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="rollerSpeed">Скорость рольганга</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="rollerSpeed" aria-describedby="rollerSpeedText" @bind="rollerSpeedRound" disabled />
+                            </td>
+                            <td>
+                                <span>м/с</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <label> </label>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-primary btn-block" @onclick="onCalculate">Рассчитать</button>
+    </div>
+</div>
+
+
+@code {
+    //bool isRatioEdit = false;
+    private bool isRatioEdit { get; set; } = false;
+    private bool isWaterFlowUpManual { get; set; } = false;
+    private bool isWaterFlowDownManual { get; set; } = false;
+    private int waterFlowUpRound { get; set; }
+    private int waterFlowDownRound { get; set; }
+    private double waterFlowDownManual { get; set; }
+    private double waterFlowUpManual { get; set; }
+    private string rollerSpeedRound { get; set; } = "0";
+    private string modelType { get; set; }
+    private _10CrSiNiCu model_10CrSiNiCu = new _10CrSiNiCu();
+    private Steel calculator;
+    private K60 model_K60 = null;
+    private bool is10CrSiNiCu = true;
+
+    protected override void OnInitialized()
+    {
+        calculator = model_10CrSiNiCu;
+    }
+
+    void onModelChange(ChangeEventArgs e)
+    {
+        switch (e.Value.ToString())
+        {
+            case "1":
+                if (model_10CrSiNiCu == null)
+                {
+                    model_10CrSiNiCu = new _10CrSiNiCu();
+                }
+                calculator = model_10CrSiNiCu;
+                is10CrSiNiCu = true;
+                break;
+            case "2":
+                if (model_K60 == null)
+                {
+                    model_K60 = new K60();
+                }
+                calculator = model_K60;
+                is10CrSiNiCu = false;
+                break;
+        }
+        this.StateHasChanged();
+    }
+
+    void onCalculate()
+    {
+        calculator.Calculate(isWaterFlowDownManual, waterFlowDownManual, isWaterFlowUpManual, waterFlowUpManual);
+        if (!isWaterFlowUpManual)
+        {
+            waterFlowUpRound = (int)Math.Round(calculator.waterFlowUp);
+        }
+        if (!isWaterFlowDownManual)
+        {
+            waterFlowDownRound = (int)Math.Round(calculator.waterFlowDown);
+        }
+        rollerSpeedRound = calculator.rollerSpeed.ToString("F2");
+    }
+
+    void KeyUp(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            onCalculate();
+        }
+    }
+}
