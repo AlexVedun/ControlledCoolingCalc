@@ -1,0 +1,50 @@
+﻿<tr>
+    <td>
+        <label for="@IdString">@LeftString</label>
+    </td>
+    <td>
+        @if (IsDisabled)
+        {
+            <input type="number" class="form-control" id="@IdString" value="@InnerValue" @onkeyup="@OnKeyUp" @onchange="OnValueChanged" disabled />
+        }
+        else
+        {
+            <input type="number" class="form-control" id="@IdString" value="@InnerValue" @onkeyup="@OnKeyUp" @onchange="OnValueChanged" />
+        }
+    </td>
+    <td>
+        <label>@RightString</label>
+    </td>
+</tr>
+
+@code {
+    [Parameter]
+    public string IdString { get; set; }
+
+    [Parameter]
+    public string LeftString { get; set; }
+
+    [Parameter]
+    public string RightString { get; set; }
+
+    [Parameter]
+    public double Value { get; set; }
+
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
+    private string InnerValue { get; set; } = "0";
+
+    private Task OnValueChanged(ChangeEventArgs e)
+    {
+        Value = Models.Globals.GetDouble(e.Value.ToString(), 0);
+
+        return ValueChanged.InvokeAsync(Value);
+    }
+
+    [Parameter]
+    public EventCallback<double> ValueChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<KeyboardEventArgs> OnKeyUp { get; set; }
+}

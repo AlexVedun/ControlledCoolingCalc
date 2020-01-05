@@ -18,101 +18,22 @@
                                 <select class="form-control" id="modelSelect" aria-describedby="thicknessText" @onchange="onModelChange">
                                     <option value="1">10ХСНД</option>
                                     <option value="2">К60</option>
+                                    <option value="3">10Г2ФБ</option>
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <label for="rollingEndTemp">Температура конца прокатки</label>
-                            </td>
-                            <td>
-
-                                @if (is10CrSiNiCu)
-                                {
-                                    <input type="number" class="form-control" id="rollingEndTemp" aria-describedby="rollingEndTempText" @bind="calculator.rollingEndTemp" @onkeyup="KeyUp" />
-                                }
-                                else
-                                {
-                                    <input type="number" class="form-control" id="rollingEndTemp" aria-describedby="rollingEndTempText" @bind="calculator.rollingEndTemp" @onkeyup="KeyUp" disabled />
-                                }
-                            </td>
-                            <td>
-                                <label>*C</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="thickness">Толщина листа</label>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="thickness" aria-describedby="thicknessText" @bind="calculator.thickness" @onkeyup="KeyUp" />
-                            </td>
-                            <td>
-                                <label>мм</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="tempWater">Температура воды</label>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="tempWater" aria-describedby="tempWaterText" @bind="calculator.tempWater" @onkeyup="KeyUp" />
-                            </td>
-                            <td>
-                                <label>*С</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="tempBeginCooling">Температура начала охлаждения</label>
-                            </td>
-                            <td>
-                                @if (is10CrSiNiCu)
-                                {
-                                    <input type="number" class="form-control" id="tempBeginCooling" aria-describedby="tempBeginCoolingText" @bind="calculator.tempBeginCooling" @onkeyup="KeyUp" disabled />
-                                }
-                                else
-                                {
-                                    <input type="number" class="form-control" id="tempBeginCooling" aria-describedby="tempBeginCoolingText" @bind="calculator.tempBeginCooling" @onkeyup="KeyUp" />
-                                }
-                            </td>
-                            <td>
-                                <label>*С</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="tempEndCooling" class="form-label">Температура конца охлаждения</label>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="tempEndCooling" aria-describedby="tempEndCoolingText" @bind="calculator.tempEndCooling" @onkeyup="KeyUp" />
-                            </td>
-                            <td>
-                                <label>*С</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="sectionCount">Количество секций</label>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="sectionCount" aria-describedby="sectionCountText" @bind="calculator.sectionCount" @onkeyup="KeyUp" />
-                            </td>
-                            <td>
-                                <label>шт.</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="coolingRate">Интенсивность охлаждения</label>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="coolingRate" aria-describedby="coolingRateText" @bind="calculator.coolingRate" @onkeyup="KeyUp" />
-                            </td>
-                            <td>
-                                <span>*C/c</span>
-                            </td>
-                        </tr>
+                        <RowGroupDouble LeftString="Толщина листа" RightString="мм" IdString="thickness" OnKeyUp="KeyUp" IsDisabled="@false" @bind-Value="@calculator.thickness"></RowGroupDouble>                     
+                        
+                        <RowGroupDouble LeftString="Температура воды" RightString="*С" IdString="tempWater" OnKeyUp="KeyUp" IsDisabled="@false" @bind-Value="@calculator.tempWater"></RowGroupDouble>                        
+                        
+                        <RowGroupDouble LeftString="Температура начала охлаждения" RightString="*С" IdString="tempBeginCooling" IsDisabled="@false" OnKeyUp="KeyUp" @bind-Value="@calculator.tempBeginCooling"></RowGroupDouble>
+                        
+                        <RowGroupDouble LeftString="Температура конца охлаждения" RightString="*С" IdString="tempEndCooling" IsDisabled="@false" OnKeyUp="KeyUp" @bind-Value="@calculator.tempEndCooling"></RowGroupDouble>
+                        
+                        <RowGroupInt LeftString="Количество секций" RightString="шт." IdString="sectionCount" OnKeyUp="KeyUp" IsDisabled="@false" @bind-Value="@calculator.sectionCount"></RowGroupInt>
+                        
+                        <RowGroupDouble LeftString="Интенсивность охлаждения" RightString="*C/c" IdString="coolingRate" OnKeyUp="KeyUp" IsDisabled="@false" @bind-Value="@calculator.coolingRate"></RowGroupDouble>
+                        
                         <tr>
                             <td>
                                 <label for="ratio">Коэффициент соотношения "низ/верх"</label>
@@ -207,17 +128,7 @@
                                 <span>л/мин</span>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <label for="rollerSpeed">Скорость рольганга</label>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="rollerSpeed" aria-describedby="rollerSpeedText" @bind="rollerSpeedRound" disabled />
-                            </td>
-                            <td>
-                                <span>м/с</span>
-                            </td>
-                        </tr>
+                        <RowGroupDisabled LeftString="Скорость рольганга" RightString="м/с" IdString="rollerSpeed" Value="@rollerSpeedRound"></RowGroupDisabled>                        
                     </tbody>
                 </table>
             </div>
@@ -246,6 +157,7 @@
     private _10CrSiNiCu model_10CrSiNiCu = new _10CrSiNiCu();
     private Steel calculator;
     private K60 model_K60 = null;
+    private _10Mn2VNb model_10Mn2VNb = new _10Mn2VNb();
     private bool is10CrSiNiCu = true;
 
     protected override void OnInitialized()
@@ -273,6 +185,14 @@
                 calculator = model_K60;
                 is10CrSiNiCu = false;
                 break;
+            case "3":
+                if (model_10Mn2VNb == null)
+                {
+                    model_10Mn2VNb = new _10Mn2VNb();
+                }
+                calculator = model_10Mn2VNb;
+                is10CrSiNiCu = false;
+                break;
         }
         this.StateHasChanged();
     }
@@ -289,6 +209,14 @@
             waterFlowDownRound = (int)Math.Round(calculator.waterFlowDown);
         }
         rollerSpeedRound = calculator.rollerSpeed.ToString("F2");
+        Console.WriteLine("thicknerollerSpeedRoundss = " + rollerSpeedRound);
+        //this.StateHasChanged();
+        //Console.WriteLine("thickness = " + calculator.thickness.ToString());
+        //Console.WriteLine("tempWater = " + calculator.tempWater.ToString());
+        //Console.WriteLine("tempBeginCooling = " + calculator.tempBeginCooling.ToString());
+        //Console.WriteLine("tempEndCooling = " + calculator.tempEndCooling.ToString());
+        //Console.WriteLine("sectionCount = " + calculator.sectionCount.ToString());
+        //Console.WriteLine("coolingRate = " + calculator.coolingRate.ToString());
     }
 
     void KeyUp(KeyboardEventArgs e)

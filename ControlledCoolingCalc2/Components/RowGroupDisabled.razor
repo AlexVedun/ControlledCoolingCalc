@@ -1,0 +1,25 @@
+﻿<tr>
+    <td>
+        <label for="@IdString">@LeftString</label>
+    </td>
+    <td>
+        <input type="text" class="form-control" id="@IdString" @bind="@Value" disabled />       
+    </td>
+    <td>
+        <label>@RightString</label>
+    </td>
+</tr>
+
+@code {
+    [Parameter]
+    public string IdString { get; set; }
+
+    [Parameter]
+    public string LeftString { get; set; }
+
+    [Parameter]
+    public string RightString { get; set; }
+
+    [Parameter]
+    public string Value { get; set; }
+}

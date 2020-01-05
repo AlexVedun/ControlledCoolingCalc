@@ -1,0 +1,48 @@
+﻿<tr>
+    <td>
+        <label for="@IdString">@LeftString</label>
+    </td>
+    <td>
+        @if (IsDisabled)
+        {
+            <input type="number" class="form-control" id="@IdString" value="@Value" @onkeyup="@OnKeyUp" @onchange="OnValueChanged" disabled />
+        }
+        else
+        {
+            <input type="number" class="form-control" id="@IdString" value="@Value" @onkeyup="@OnKeyUp" @onchange="OnValueChanged" />
+        }
+    </td>
+    <td>
+        <label>@RightString</label>
+    </td>
+</tr>
+
+@code {
+    [Parameter]
+    public string IdString { get; set; }
+
+    [Parameter]
+    public string LeftString { get; set; }
+
+    [Parameter]
+    public string RightString { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }
+
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
+    private Task OnValueChanged(ChangeEventArgs e)
+    {
+        Value = Int32.Parse(e.Value.ToString());
+
+        return ValueChanged.InvokeAsync(Value);
+    }
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<KeyboardEventArgs> OnKeyUp { get; set; }
+}

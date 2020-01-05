@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Models.Globals;
 
 namespace ControlledCoolingCalculator
 {
@@ -160,21 +161,7 @@ namespace ControlledCoolingCalculator
 
         public bool IsNotCorrectS1IsManual { get => (bool)!CorrectS1IsManual.IsChecked; }
 
-        public static double GetDouble(string value, double defaultValue)
-        {
-            double result;
-
-            // Try parsing in the current culture
-            if (!double.TryParse(value, System.Globalization.NumberStyles.Any, CultureInfo.CurrentCulture, out result) &&
-                // Then try in US english
-                !double.TryParse(value, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out result) &&
-                // Then in neutral language
-                !double.TryParse(value, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result))
-            {
-                result = defaultValue;
-            }
-            return result;
-        }
+        
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
